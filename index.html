@@ -187,6 +187,33 @@
             </a>
         </section>
 
+        <section class="section" id="contacto">
+            <div class="section-head">
+                <span class="kicker">Contacto</span>
+                <h2>¿Dudas o sugerencias?</h2>
+                <p>Escríbenos y te respondemos. También en <a href="mailto:globalsupportpyt@gmail.com">globalsupportpyt@gmail.com</a>.</p>
+            </div>
+            <form class="contact-form" id="contact-form">
+                <div class="row">
+                    <div>
+                        <label for="c-name">Nombre</label>
+                        <input id="c-name" name="name" type="text" maxlength="80" placeholder="Tu nombre">
+                    </div>
+                    <div>
+                        <label for="c-email">Email (para responderte)</label>
+                        <input id="c-email" name="email" type="email" maxlength="120" placeholder="tu@email.com">
+                    </div>
+                </div>
+                <div>
+                    <label for="c-msg">Mensaje</label>
+                    <textarea id="c-msg" name="message" maxlength="4000" required placeholder="Cuéntanos..."></textarea>
+                </div>
+                <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button class="btn btn-primary" type="submit" id="c-submit">Enviar mensaje</button>
+                <div class="form-msg" id="c-status" role="status" aria-live="polite"></div>
+            </form>
+        </section>
+
         <footer class="site">
             <div class="f-top">
                 <div class="f-brand">
@@ -197,7 +224,7 @@
                     </div>
                 </div>
                 <div class="f-links">
-                    <a href="mailto:globalsupportpyt@gmail.com">Contáctanos</a>
+                    <a href="#contacto">Contáctanos</a>
                     <a href="terms.html">Términos de Servicio</a>
                     <a href="privacy.html">Política de Privacidad</a>
                 </div>
@@ -233,6 +260,35 @@
                 document.getElementById('stat-highlighted').textContent = fmt(d.highlighted);
             })
             .catch(() => {});
+
+        // Formulario de contacto
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('c-submit');
+            const status = document.getElementById('c-status');
+            const body = {
+                name: form.name.value, email: form.email.value,
+                message: form.message.value, website: form.website.value
+            };
+            btn.disabled = true; status.className = 'form-msg'; status.textContent = 'Enviando…';
+            try {
+                const r = await fetch('https://skullboard-fqf1.onrender.com/api/contact', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+                });
+                const d = await r.json().catch(() => ({}));
+                if (r.ok && d.ok) {
+                    status.className = 'form-msg ok'; status.textContent = '✅ ¡Mensaje enviado! Te responderemos pronto.';
+                    form.reset();
+                } else {
+                    status.className = 'form-msg err'; status.textContent = '❌ ' + (d.error || 'No se pudo enviar. Inténtalo más tarde.');
+                }
+            } catch {
+                status.className = 'form-msg err'; status.textContent = '❌ Error de conexión. Inténtalo más tarde.';
+            } finally {
+                btn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>

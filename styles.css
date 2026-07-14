@@ -293,6 +293,23 @@ table.data td { color: var(--ink-soft); }
 .chg li { color: var(--ink-soft); font-size: 0.92rem; padding-left: 22px; position: relative; margin-bottom: 8px; line-height: 1.5; }
 .chg li::before { content: "›"; position: absolute; left: 5px; color: var(--violet); font-weight: 700; }
 
+/* ====== Contacto ====== */
+.contact-form { max-width: 560px; margin: 0 auto; display: grid; gap: 14px; }
+.contact-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.contact-form label { display: block; font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 6px; }
+.contact-form input, .contact-form textarea {
+    width: 100%; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 14px; transition: border-color .2s, background .2s;
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--border-strong); background: var(--surface-2); }
+.contact-form textarea { resize: vertical; min-height: 130px; }
+.contact-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-form button { justify-self: start; }
+.contact-form button[disabled] { opacity: .6; cursor: default; transform: none; }
+.form-msg { font-size: 0.9rem; min-height: 1.2em; }
+.form-msg.ok { color: var(--good); }
+.form-msg.err { color: var(--bad); }
+
 /* ====== Theme toggle ====== */
 .theme-toggle {
     width: 38px; height: 38px; flex: none; cursor: pointer; border-radius: 50%;
