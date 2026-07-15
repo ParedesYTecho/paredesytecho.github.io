@@ -209,6 +209,18 @@ svg { display: block; width: 24px; height: 24px; fill: none; stroke: currentColo
 .filter-chip.active { color: #fff; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); border-color: transparent; }
 .filter-chip.active .count { color: #fff; background: rgba(255,255,255,0.2); }
 .cmd[hidden] { display: none; }
+.cmd.has-params { cursor: pointer; position: relative; }
+.cmd .c-caret { position: absolute; right: 14px; top: 15px; color: var(--ink-dim); font-size: 0.72rem; transition: transform .2s; }
+.cmd.open .c-caret { transform: rotate(180deg); }
+.cmd .c-params { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.cmd.open .c-params { display: block; }
+.param { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.param code { font-family: 'SFMono-Regular', ui-monospace, Consolas, monospace; font-size: 0.82rem; color: var(--violet-2); font-weight: 600; }
+.param .req, .param .opt { font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; }
+.param .req { color: var(--bad); border: 1px solid rgba(251,113,133,0.35); background: rgba(251,113,133,0.08); }
+.param .opt { color: var(--ink-dim); border: 1px solid var(--border); background: var(--surface-2); }
+.param .ptype { font-size: 0.72rem; color: var(--ink-dim); }
+.c-params .pdesc { font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
 .cmd .tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--admin); border: 1px solid rgba(251,191,36,0.35); background: rgba(251,191,36,0.08); padding: 1px 6px; border-radius: 999px; vertical-align: middle; margin-left: 6px; }
 
 /* ====== CTA band ====== */
